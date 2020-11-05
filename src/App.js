@@ -1,5 +1,5 @@
 import 'fontsource-roboto';
-import SignUp from './Registration/SignUp'
+import SignUp from './components/Registration/SignUp'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
