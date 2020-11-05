@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
 const classes = useStyles();
 
-const initialState = {username: "", password: "", password_confirmation: ""}
+const initialState = {username: "",first_name: "", last_name: "", birthday:"", bio:"", password: "", password_confirmation: ""}
 const [entry, setEntry] = useState(initialState)
 
 const handleChange = (e) => {
