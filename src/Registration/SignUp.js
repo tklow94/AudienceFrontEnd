@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -47,7 +48,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-  const classes = useStyles();
+const classes = useStyles();
+
+const initialState = {username: "", password: "", password_confirmation: ""}
+const [entry, setEntry] = useState(initialState)
+
+const handleChange = (e) => {
+    setEntry({
+      ...entry,
+      [e.target.name]: e.target.value.trim().toLowerCase()
+    })
+   console.log(entry)
+  }
+
+const users = () => {
+    fetch('http://localhost:3000/users',{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry)
+    })
+    .then(res => res.json())
+
+}
 
   return (
     <Container component="main" maxWidth="xs">
@@ -105,6 +129,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -120,6 +145,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={users}
           >
             Sign Up
           </Button>
